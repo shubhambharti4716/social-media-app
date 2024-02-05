@@ -26,60 +26,103 @@
   font-size: 16px;
 }
 .card-container {
-  padding: 1.5rem 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 2rem;
 }
 .card {
-  padding: 1rem;
+  margin-top: 0.8rem;
+  padding: 0.8rem;
   background: #fff;
-  aspect-ratio: 0.902;
-  width: 420px;
+  max-width: 420px;
+  height: 460px;
   cursor: pointer;
   border-radius: 26px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  box-shadow: 1px 8px 8px 0px #00000005;
+  box-shadow: 1px 8px 8px 0px rgb(214, 214, 214);
 }
-.pic {
-  aspect-ratio: 1.6;
+.img-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  display: flex;
+  object-fit: cover;
+  scale: 0.95;
+  max-height: 269px;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  padding: 1rem;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.img-box > img {
+  width: 100%;
+  max-height: fit-content;
   border-radius: 20px;
   object-fit: cover;
 }
-.detail-btn {
+.item-details {
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 4px;
 }
-.texts h3 {
-  margin-bottom: 0.5rem;
+.item-details > .title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
 }
-.texts p {
-  color: var(--grey-text);
+.item-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
 }
-.texts span {
-  display: block;
-  color: var(--orange);
-  font-weight: 800;
-}
-.detail-btn button {
-  background: var(--orange-gradient);
+.item-body > button {
+  display: flex;
+  padding: 0;
+  background-color: transparent;
   border: none;
-  padding: 0.8rem 1rem;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 24px;
-  display: flex;
+  cursor: pointer;
+  border-radius: 0.5rem;
 }
+
+.body-details {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+.paragraph {
+  color: rgb(60, 58, 58);
+}
+.read-more {
+  color: #f05a22;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.item-body > button > img {
+  width: 2rem;
+}
+
 @media screen and (max-width: 769px) {
   .card {
     width: 300px;
   }
-  .detail-btn {
+  .item-body > button > img {
     flex-direction: column;
   }
 }
