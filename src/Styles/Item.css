@@ -20,6 +20,8 @@
 .selected-event {
   display: flex;
   gap: 2rem;
+  margin-top: 1.5rem;
+  margin-left: 3rem;
 }
 .event-img-box {
   width: 20rem;
@@ -55,6 +57,9 @@
 }
 .social>img {
     width: 1.5rem;
+}
+.more-events{
+  margin: 3rem;
 }
 .details-box {
     flex: 1 1;

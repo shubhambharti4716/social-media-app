@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "../Styles/Homepage.css";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import arrow from "../Assets/arrow.png";
 import { postRequest } from "../Redux/Actions/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CardDetails from "./CardDetails";
+import Spinner from "./Spinner"; 
 
 function Homepage() {
   const { loading, data, error } = useSelector((state) => state);
@@ -16,7 +17,7 @@ function Homepage() {
   const navigate = useNavigate();
 
   const handleRedirectToItem = (itemId) => {
-    navigate(`/item/:${itemId}`);
+    navigate(`/item/${itemId}`);
   };
 
   useEffect(() => {
@@ -65,54 +66,24 @@ function Homepage() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        {loading && <h2>Loading...</h2>}
+        {loading && <Spinner />} {/* Display the Spinner when loading */}
         {error && <h2>Error fetching data. Please try again later.</h2>}
+        {!loading && !error && (
         <div className="card-container">
-          {filteredData.length > 0 ? (
+        {filteredData.length > 0 ? (
             filteredData.map((post) => (
-              <div key={post.id} className="card">
-                <div className="img-box">
-                  <div className="cover"></div>
-                  <img
-                    src={`https://picsum.photos/200?random=${post.id}`}
-                    alt={`Post ${post.id}`}
-                  ></img>
-                </div>
-                <div className="item-details">
-                  <h4 className="title">{post.title}</h4>
-                  <div className="item-body">
-                    <div className="body-details">
-                      <span className="paragraph">
-                        {post.showFullContent
-                          ? post.body
-                          : `${post.body.slice(0, 100)}...`}
-                      </span>
-
-                      {post.body.length > 100 && (
-                        <span
-                          className="read-more"
-                          onClick={() => toggleContent(post.id)}
-                        >
-                          {post.showFullContent ? " Read less" : " Read more"}
-                        </span>
-                      )}
-                    </div>
-
-                    <button onClick={() => handleRedirectToItem(post.id)}>
-                      <img
-                        src={arrow}
-                        alt=""
-                        onClick={() => handleRedirectToItem(post.id)}
-                      />
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <CardDetails
+                key={post.id}
+                post={post}
+                handleRedirectToItem={handleRedirectToItem}
+                toggleContent={toggleContent}
+              />
             ))
           ) : (
-            <h2>No Results Found</h2>
+            <h2>{filteredData.length === 0 ? "No Results Found" : ""}</h2>
           )}
         </div>
+        )}
       </div>
     </div>
   );
